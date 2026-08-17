@@ -10,6 +10,11 @@ on:
 permissions:
   contents: write
 
+# Only one build at a time, so two quick pushes cannot race each other's commit.
+concurrency:
+  group: build-poster
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -50,5 +55,12 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add Lumos-Poster-A2.pdf
-          git diff --staged --quiet || git commit -m "build: regenerate A2 poster PDF"
-          git push
+          git diff --staged --quiet && { echo "PDF unchanged, nothing to commit."; exit 0; }
+          git commit -m "build: regenerate A2 poster PDF"
+          # Someone may have pushed while we were building; rebase and retry.
+          for i in 1 2 3; do
+            if git push; then echo "pushed on attempt $i"; exit 0; fi
+            echo "push rejected, rebasing and retrying"
+            git pull --rebase origin main
+          done
+          echo "could not push after 3 attempts"; exit 1
