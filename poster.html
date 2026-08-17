@@ -29,7 +29,7 @@
   --poster-w: 420mm;
   --poster-h: 594mm;
   --pad: 10mm;
-  --gap: 3mm;
+  --gap: 2.5mm;
 
   --t-title:  19mm;
   --t-deck:   4.7mm;
@@ -157,6 +157,11 @@ h1 .lum{ color:var(--sun-hi); }
 .body{ flex:1 1 auto; padding:var(--pad); display:flex; flex-direction:column; gap:var(--gap); min-height:0; }
 .row{ display:grid; gap:var(--gap); }
 .row.two{ grid-template-columns:1fr 1fr; }
+/* A two-column row is as tall as its TALLER column, so an even split wastes
+   height whenever one side has more to say. These give the wordy side more
+   width; its text reflows into fewer lines and the whole row gets shorter. */
+.row.lean-right{ grid-template-columns:.86fr 1.14fr; }
+.cols2.lean-left{ grid-template-columns:1fr 1fr; }
 
 .sec{ display:flex; flex-direction:column; min-width:0; }
 .sec-head{
@@ -217,9 +222,14 @@ tr.us td{ background:rgba(255,194,75,.22); font-weight:700; }
 .tsub{ font-size:3mm; color:var(--tx-mute); }
 
 /* ---------- four-step strip: images shown WHOLE ---------- */
-.shots{ display:flex; gap:1.8mm; align-items:flex-start; }
+/* Each shot keeps its own aspect, so the row rarely sums to exactly 400mm.
+   space-between spreads the remainder into the gaps instead of pooling it as
+   dead space at the right end, and the strip reads as full width. */
+.shots{ display:flex; gap:1.8mm; align-items:flex-start; justify-content:space-between; }
 .shot{ display:flex; flex-direction:column; gap:1mm; }
-.shot img{ height:31mm; width:auto; display:block; border:.3mm solid var(--rule); }
+/* Height is what sizes this strip: each shot keeps its own aspect, so the row
+   width follows from it. 48mm fills the 400mm column almost exactly. */
+.shot img{ height:43mm; width:auto; display:block; border:.3mm solid var(--rule); }
 .shot .cap{ font-family:var(--mono); font-size:2.75mm; color:var(--tx-mute); line-height:1.18; }
 .shot .cap b{ color:var(--tx); font-weight:700; }
 /* the same room at two times, side by side */
@@ -505,7 +515,7 @@ body.editing [data-ed]:focus{
         <span class="num">1</span>
         <h2><b class="rw scoring">PROBLEM</b> <span class="sub">You commit to a room you saw once, at one hour, in one season.</span></h2>
       </div>
-      <div class="sec-body cols2">
+      <div class="sec-body cols2 lean-left">
         <div class="sec-body">
           <p class="sm">A listing photo answers none of the questions that decide the money:</p>
           <ol class="q">
@@ -523,23 +533,25 @@ body.editing [data-ed]:focus{
             </p>
           </div>
         </div>
-        <ul>
-          <li class="sm">
-            Shoppers returned <strong>US$849.9 bn</strong> of goods in 2025, 15.8% of all
-            retail sales.<span class="ref">1</span> Furniture runs <strong>15 to 20%</strong>,
-            and <em>the size not fitting the space causes about 58% of it</em>.<span class="ref">2</span>
-          </li>
-          <li class="sm">
-            Light is not decoration. With better daylight at home, people fell asleep
-            <strong>22 minutes earlier</strong> and scored <strong>7% higher</strong> on
-            mood.<span class="ref">3</span>
-          </li>
-          <li class="sm">
-            In Singapore it depends which way you face: west-facing units take direct sun
-            from <strong>2pm to 6pm</strong>, and the concrete keeps releasing that heat past
-            midnight.<span class="ref">4</span>
-          </li>
-        </ul>
+        <div class="sec-body">
+          <ul>
+            <li class="sm">
+              Shoppers returned <strong>US$849.9 bn</strong> of goods in 2025, 15.8% of all
+              retail sales.<span class="ref">1</span> Furniture runs <strong>15 to 20%</strong>,
+              and <em>the size not fitting the space causes about 58% of it</em>.<span class="ref">2</span>
+            </li>
+            <li class="sm">
+              Light is not decoration. With better daylight at home, people fell asleep
+              <strong>22 minutes earlier</strong> and scored <strong>7% higher</strong> on
+              mood.<span class="ref">3</span>
+            </li>
+            <li class="sm">
+              In Singapore it depends which way you face: west-facing units take direct sun
+              from <strong>2pm to 6pm</strong>, and the concrete keeps releasing that heat past
+              midnight.<span class="ref">4</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -612,7 +624,7 @@ body.editing [data-ed]:focus{
             the standard astronomical formulas, then rotate it by how far the building is
             turned from true north.
           </p>
-          <div class="formula">sun = f(lat, lng, date, time)<br>then rotated by north offset</div>
+          <div class="formula">sun = f(lat, lng, date, time), then rotated by north offset</div>
           <p class="sm">
             The 3D engine then casts shadows from a light pointing exactly that way, so the
             shadows on your floor are <strong>predictions you can check by standing in the
@@ -636,15 +648,15 @@ body.editing [data-ed]:focus{
             <tbody>
               <tr>
                 <td>A mood preset<br><span class="tsub">what consumer planners do</span></td>
-                <td><span class="no">Rejected.</span> Looks nice, tells you nothing about your flat.</td>
+                <td><span class="no">Rejected.</span> Looks nice, says nothing about your flat.</td>
               </tr>
               <tr>
                 <td>Offline path tracing<br><span class="tsub">the best physics</span></td>
-                <td><span class="no">Rejected.</span> Cannot scrub a whole day at 60 fps in a browser.</td>
+                <td><span class="no">Rejected.</span> Cannot scrub a day at 60 fps in a browser.</td>
               </tr>
               <tr>
                 <td>Baked lighting<br><span class="tsub">pre-computed, fast</span></td>
-                <td><span class="no">Rejected.</span> Correct for one arrangement, wrong the moment a chair moves.</td>
+                <td><span class="no">Rejected.</span> Right for one layout, wrong once a chair moves.</td>
               </tr>
               <tr class="us">
                 <td>Real-time shadows on a geographic sun</td>
@@ -656,7 +668,7 @@ body.editing [data-ed]:focus{
           <ul>
             <li class="sm">A time-of-day slider, and a 24-hour study at one render per hour</li>
             <li class="sm">Sun path and compass drawn for your actual site</li>
-            <li class="sm">A floor heatmap in lux, checked against bedroom, living room, kitchen or desk levels, with blinds that remove light from the heatmap and not just the picture</li>
+            <li class="sm">A floor heatmap in lux, checked against bedroom, living room, kitchen or desk levels, with blinds that dim the heatmap too</li>
           </ul>
         </div>
 
@@ -750,9 +762,8 @@ body.editing [data-ed]:focus{
           <p class="sm">
             200 seeded trials, 3 to 6 items each, rooms 3.5 to 7 m wide. The same 885
             placement requests went to our placer and to a <strong>random-placement
-            baseline</strong>. One checker, written separately from the placer, graded both.
-            The workload deliberately includes an item too big to fit, so refusals reflect
-            real failures.
+            baseline</strong>, graded by one checker written separately from the placer. The
+            workload includes an item too big to fit, so refusals reflect real failures.
           </p>
           <table>
             <thead><tr><th>Placements that broke a rule</th><th class="num-c">Random</th><th class="num-c">Ours</th></tr></thead>
@@ -766,10 +777,10 @@ body.editing [data-ed]:focus{
             </tbody>
           </table>
           <p class="sm" style="color:var(--tx-mute)">
-            Three of the four failure types go to zero. The fourth is a real defect we found
-            this way and left in, described in section 7. <strong>The baseline is random
-            placement, not a language model</strong>, so this shows these rules are hard to
-            satisfy by chance. It does not show we beat an LLM. We have not measured that.
+            Three of four failure types go to zero. The fourth is a real defect we found this
+            way and left in (section 7). <strong>The baseline is random placement, not a
+            language model</strong>: it shows these rules are hard to satisfy by chance, not
+            that we beat an LLM.
           </p>
           <div class="panel">
             <p class="sm mono">
@@ -783,7 +794,7 @@ body.editing [data-ed]:focus{
     </div>
 
     <!-- ==================== ROW: (6) CONSTRAINTS + (7) HONESTY ==================== -->
-    <div class="row two">
+    <div class="row two lean-right">
 
       <section class="sec">
         <div class="sec-head">
@@ -801,8 +812,8 @@ body.editing [data-ed]:focus{
             <li class="sm">
               <strong>Cost and latency.</strong> Drawing, furnishing and scrubbing the day
               cost <strong>nothing</strong>: no key, no network. Image generation calls the
-              GPT API and takes <strong>35 to 90 seconds a call</strong>, which ruled out
-              most free hosting tiers, so it ships with a free offline mode for evaluation.
+              GPT API at <strong>35 to 90 seconds a call</strong>, which ruled out most free
+              hosting tiers, so it ships with a free offline mode.
             </li>
             <li class="sm">
               <strong>Privacy.</strong> Your home address never enters the file. Only a
@@ -837,10 +848,10 @@ body.editing [data-ed]:focus{
               <strong>14.9% of placements leave a walkway blocked</strong>, which the placer's
               own documentation says cannot happen. <strong>Cause:</strong> it remembers each
               item's footprint but not the clear space in front of it, so item 2 can land in
-              the walkway item 1 reserved. All 107 violations have that shape. <strong>The
-              tests missed it</strong> because they check each item against the room as it was
-              at the time, the same blind spot the placer has. We left it in because the
-              measurement is the result.
+              the walkway item 1 reserved. All 107 violations have that shape. <strong>The tests
+              missed it</strong>: they check each item against the room as it was at the time,
+              the same blind spot the placer has. We left it in because the measurement is the
+              result.
             </p>
           </div>
           <ul>
@@ -851,20 +862,19 @@ body.editing [data-ed]:focus{
             </li>
             <li class="gap sm">
               <strong>The test suite is red.</strong> 25 tests fail after a module move still
-              in progress, so <span class="mono">pnpm test</span> exits non-zero. The features
-              work; the tests point at old paths.
+              in progress, so <span class="mono">pnpm test</span> exits non-zero. The tests point
+              at old paths; the features work.
             </li>
             <li class="gap sm">
               <strong>Not measured.</strong> No real language model benchmarked against our
-              placer. Postgres tested against an imitation, Docker never run. <strong>No user
-              study: zero outside users.</strong>
+              placer. Postgres tested against an imitation, Docker never run.
+              <strong>No user study: zero outside users.</strong>
             </li>
           </ul>
           <div class="panel">
             <h3>Given two more weeks</h3>
             <ol class="q" style="gap:.8mm">
-              <li class="sm">Fix the walkway defect and re-run this benchmark. The harness
-                exists, so the fix is verifiable the day it lands.</li>
+              <li class="sm">Fix the walkway defect and re-run this benchmark. The harness exists, so it is verifiable the day it lands.</li>
               <li class="sm">Add tests that grade a finished room as a whole, not item by item.</li>
               <li class="sm">Check time zones, then watch five real move-in shoppers use it.</li>
             </ol>
