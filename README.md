@@ -10,7 +10,7 @@ one command.
 | **`Lumos-Poster-A2.pdf`** | **Print this.** One A2 page, fonts and images embedded. |
 | **`POSTER-GUIDE.md`** | **Read this.** Every section and number explained, the 10-minute script, likely judge questions. Starts with three things to fix before printing. |
 | `poster.html` | **Edit this.** The source, commented throughout. |
-| `citations.html` | The linked sources page the footer QR points at. |
+| `site/index.html` | The evidence page the footer QR points at, deployed to Vercel. |
 | `poster-standalone.html` | Generated. Same poster with images inlined, for sharing one file. |
 | `make-pdf.sh` | Regenerates the PDF and checks it is still one A2 page. |
 | `build.js` | Inlines `assets/*.jpg`. Called by `make-pdf.sh`. |
@@ -30,16 +30,12 @@ left, top, right, bottom in the 1600x1000 original), then:
 python3 crop-assets.py && ./make-pdf.sh
 ```
 
-## Before the finals: make the sources page public
+## The sources page
 
-The footer QR points at a published page holding every citation and the full validation
-method. **That page is private until you share it.** Open it, use the share menu, and
-set it so anyone with the link can view. Otherwise a judge who scans the QR gets a
-login wall.
-
-Sources page: https://claude.ai/code/artifact/c3f61796-4e4f-4e2a-b05b-1906496cf33f
-
-If you would rather host it yourself, see "Changing where the QR points" below.
+The footer QR points at **https://lumos-evidence.vercel.app**, a public page with every
+citation, the full validation method, and all raw numbers. No sharing step, no login:
+a judge can scan it and read it immediately. See "The evidence page" at the bottom for
+how to edit and redeploy it.
 
 ## The edit to PDF loop
 
@@ -137,7 +133,7 @@ node -e "require('qrcode').toString('YOUR_URL',{type:'svg',margin:0,errorCorrect
 
 Copy the `d` attribute from the `<path stroke=...>` in the output, and paste it over the
 matching path in `poster.html`. Keep the `viewBox` in sync: a longer URL produces more
-modules (the repo QR is 29x29, the sources QR is 37x37).
+modules (both QRs are currently 29x29).
 
 ## Where the numbers came from
 
