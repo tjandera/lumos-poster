@@ -1,0 +1,54 @@
+name: Build poster PDF
+
+# Edit poster.html (the GitHub mobile web editor works fine for this), commit,
+# and this rebuilds Lumos-Poster-A2.pdf and commits it back. No Mac needed.
+on:
+  push:
+    paths: ['poster.html', 'assets/**', 'build.js', '.github/workflows/build-poster.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Inline the screenshots
+        run: node build.js
+
+      - name: Print to PDF at A2
+        run: |
+          python3 -m http.server 8899 &
+          sleep 2
+          google-chrome --headless --disable-gpu --no-sandbox \
+            --no-pdf-header-footer \
+            --print-to-pdf="Lumos-Poster-A2.pdf" \
+            "http://localhost:8899/poster-standalone.html"
+
+      - name: Check it is still one A2 page
+        run: |
+          python3 - <<'PY'
+          import re, sys
+          d = open('Lumos-Poster-A2.pdf','rb').read()
+          box = re.search(rb'/MediaBox\s*\[([^\]]+)\]', d)
+          w, h = [float(x) for x in box.group(1).split()][2:4]
+          pages = len(re.findall(rb'/Type\s*/Page[^s]', d))
+          print("page: %.1f x %.1f mm, pages: %d" % (w*25.4/72, h*25.4/72, pages))
+          if pages != 1:
+              sys.exit("Content overflows one A2 page. Trim something and push again.")
+          PY
+
+      - name: Commit the PDF
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Lumos-Poster-A2.pdf
+          git diff --staged --quiet || git commit -m "build: regenerate A2 poster PDF"
+          git push

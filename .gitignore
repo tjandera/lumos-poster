@@ -1,0 +1,17 @@
+# The Lumos source clone (read-only reference, has its own remote)
+lumos/
+repo/
+
+# Generated
+node_modules/
+poster-standalone.html
+.DS_Store
+
+# From a parallel session that worked in this folder on 16 Aug. Left on disk,
+# kept out of this repo so the poster history stays clean. Delete or keep as
+# you like -- nothing here depends on them.
+poster/
+research/
+scripts/
+validation/
+assets/print/

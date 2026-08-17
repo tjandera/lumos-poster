@@ -1,0 +1,356 @@
+<title>Lumos Evidence Appendix</title>
+<style>
+:root{
+  --ink:#0A1428; --ink-2:#16233D; --paper:#EDF0F4; --paper-2:#FFFFFF;
+  --rule:#C4CCD8; --rule-dark:#2E3E5C;
+  --sun:#C77A16; --sun-hi:#FFC24B; --sky:#2F5C8F;
+  --ok:#2F7D5E; --gap-c:#B4552F;
+  --tx:#101A2C; --tx-mute:#55607A; --tx-inv:#EDF0F4; --tx-inv-mute:#9AAAC4;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--tx); font-family:var(--sans);
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 80px}
+
+header{background:var(--ink);color:var(--tx-inv);padding:44px 0 38px;margin-bottom:40px}
+header .wrap{padding-bottom:0}
+.kick{
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sun-hi);font-weight:600;margin-bottom:14px;
+}
+h1{font-size:38px;line-height:1.08;letter-spacing:-.025em;font-weight:800;color:#fff}
+h1 .l{color:var(--sun-hi)}
+header p{margin-top:14px;color:var(--tx-inv-mute);font-size:16px;max-width:62ch}
+header a{color:var(--sun-hi)}
+
+h2{
+  font-size:24px;letter-spacing:-.02em;font-weight:700;margin:44px 0 6px;
+  padding-bottom:8px;border-bottom:2px solid var(--ink);
+}
+h2:first-of-type{margin-top:0}
+h3{font-size:17px;font-weight:700;margin:26px 0 8px;letter-spacing:-.01em}
+p{font-size:16px;margin:12px 0;max-width:68ch}
+.lede{font-size:17px;color:var(--tx-mute)}
+
+ol.refs{list-style:none;counter-reset:r;margin-top:18px}
+ol.refs li{
+  counter-increment:r;position:relative;padding:16px 0 16px 46px;
+  border-bottom:1px solid var(--rule);font-size:15.5px;line-height:1.5;
+}
+ol.refs li:last-child{border-bottom:none}
+ol.refs li::before{
+  content:counter(r);position:absolute;left:0;top:16px;
+  font-family:var(--mono);font-size:13px;font-weight:700;color:var(--paper);
+  background:var(--ink);width:26px;height:26px;border-radius:3px;
+  display:flex;align-items:center;justify-content:center;
+}
+ol.refs .t{font-weight:600;display:block;margin-bottom:3px}
+ol.refs .src{color:var(--tx-mute);font-size:14.5px}
+ol.refs a{
+  font-family:var(--mono);font-size:13px;color:var(--sky);
+  word-break:break-all;display:inline-block;margin-top:5px;
+}
+ol.refs a:hover{text-decoration:underline}
+.tag{
+  display:inline-block;font-family:var(--mono);font-size:10.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;padding:3px 7px;border-radius:3px;
+  vertical-align:2px;margin-left:6px;
+}
+.tag.peer{background:#DCEBE3;color:var(--ok)}
+.tag.primary{background:#DFE7F2;color:var(--sky)}
+.tag.caution{background:#F5E0D6;color:var(--gap-c)}
+
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+th{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  text-align:left;color:var(--tx-mute);border-bottom:2px solid var(--ink);padding:0 10px 8px 0;
+}
+td{padding:9px 10px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;padding-right:0}
+tr:last-child td{border-bottom:none}
+
+pre{
+  background:var(--ink);color:var(--sun-hi);font-family:var(--mono);font-size:13.5px;
+  padding:16px 18px;border-radius:4px;overflow-x:auto;line-height:1.6;margin:14px 0;
+}
+code{font-family:var(--mono);font-size:.92em;background:#DDE3EC;padding:1px 5px;border-radius:3px}
+pre code{background:none;padding:0;color:inherit;font-size:inherit}
+
+.note{
+  background:var(--paper-2);border-left:4px solid var(--sun);padding:16px 20px;
+  margin:20px 0;font-size:15.5px;
+}
+.note.warn{border-left-color:var(--gap-c)}
+.note strong{font-weight:700}
+
+footer{
+  margin-top:56px;padding-top:24px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:13px;color:var(--tx-mute);line-height:1.7;
+}
+footer a{color:var(--sky)}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1626; --paper-2:#16233D; --rule:#2A3950;
+    --tx:#E4E9F0; --tx-mute:#93A1B8; --sky:#7FA8D4; --sun:#E8952B;
+    --ok:#5FBF95; --gap-c:#E08A5F;
+  }
+  :root:not([data-theme="light"]) code{background:#22314A;color:#E4E9F0}
+  :root:not([data-theme="light"]) .tag.peer{background:#1C3B2E;color:#5FBF95}
+  :root:not([data-theme="light"]) .tag.primary{background:#1E2E47;color:#7FA8D4}
+  :root:not([data-theme="light"]) .tag.caution{background:#3A241B;color:#E08A5F}
+}
+:root[data-theme="dark"]{
+  --paper:#0E1626; --paper-2:#16233D; --rule:#2A3950;
+  --tx:#E4E9F0; --tx-mute:#93A1B8; --sky:#7FA8D4; --sun:#E8952B;
+  --ok:#5FBF95; --gap-c:#E08A5F;
+}
+:root[data-theme="dark"] code{background:#22314A;color:#E4E9F0}
+:root[data-theme="dark"] .tag.peer{background:#1C3B2E;color:#5FBF95}
+:root[data-theme="dark"] .tag.primary{background:#1E2E47;color:#7FA8D4}
+:root[data-theme="dark"] .tag.caution{background:#3A241B;color:#E08A5F}
+</style>
+
+<header>
+  <div class="wrap">
+    <div class="kick">Project Lumos / Evidence appendix</div>
+    <h1>Sources and <span class="l">method</span></h1>
+    <p>
+      Everything cited on the poster, plus the full method behind the sun accuracy
+      measurement so you can reproduce it.
+      Repository: <a href="https://github.com/tjandera/lumos">github.com/tjandera/lumos</a>
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <h2>How the layout placer was measured</h2>
+  <p class="lede">
+    Poster section 3A compares our deterministic placer against a random-placement
+    baseline on an identical workload.
+  </p>
+
+  <h3>Setup</h3>
+  <table>
+    <tr><th>Parameter</th><th>Value</th></tr>
+    <tr><td>Trials</td><td>200, seeded</td></tr>
+    <tr><td>Items per trial</td><td>3 to 6</td></tr>
+    <tr><td>Room sizes</td><td>3.5 to 7 m by 3 to 6 m</td></tr>
+    <tr><td>Placement requests per strategy</td><td class="n">885</td></tr>
+    <tr><td>Grading</td><td>One checker, written independently of the placer, applied to both strategies</td></tr>
+    <tr><td>Workload</td><td>Deliberately includes an item too large to fit, so refusals reflect genuine failures rather than a cherry-picked easy set</td></tr>
+  </table>
+
+  <h3>Result</h3>
+  <table>
+    <tr><th>Placements breaking a hard rule</th><th class="n">Random baseline</th><th class="n">Deterministic placer</th></tr>
+    <tr><td><strong>Any rule broken</strong></td><td class="n">89.2%</td><td class="n">14.9%</td></tr>
+    <tr><td>Outside the room</td><td class="n">50.5%</td><td class="n">0%</td></tr>
+    <tr><td>Overlapping another item</td><td class="n">74.8%</td><td class="n">0%</td></tr>
+    <tr><td>Front clearance / walkway blocked</td><td class="n">44.6%</td><td class="n">14.9%</td></tr>
+    <tr><td>Door swing blocked</td><td class="n">26.2%</td><td class="n">0%</td></tr>
+    <tr><td>Batches with every placement valid</td><td class="n">0.5%</td><td class="n">58.0%</td></tr>
+    <tr><td>Refused outright, no bad placement emitted</td><td class="n">0%</td><td class="n">19.1%</td></tr>
+    <tr><td>Latency per placement, mean / p95</td><td class="n">~0.001 / ~0.004 ms</td><td class="n">~1.2 / ~2.5 ms</td></tr>
+  </table>
+
+  <div class="note warn">
+    <strong>Three things this measurement does not show.</strong>
+    The baseline is <strong>uniform-random placement, not a language model</strong>. It
+    establishes that these constraints are hard to satisfy by chance; it does not
+    establish that the placer beats an LLM, and no real LLM has been benchmarked.
+    "Batches fully valid" counts a trial where every request was refused as vacuously
+    clean, so read it alongside the 19.1% refusal rate rather than on its own.
+    Latency is order-of-magnitude only: the mean varied 6.06 to 1.15 to 1.21 ms across
+    three consecutive runs as the JIT warmed up, though every count-based metric was
+    byte-identical across those runs.
+  </div>
+
+  <div class="note warn">
+    <strong>Reproducibility status.</strong> The constraint solver itself is in the
+    repository, including clearance handling
+    (<code>packages/ai/src/solver.ts</code>, <code>DEFAULT_CLEARANCE</code>,
+    <code>needsFrontClearance</code>). The measurement harness that produced the table
+    above is <strong>not yet in the public repository</strong> and must be pushed before
+    these figures can be independently reproduced.
+  </div>
+
+  <h2>How the sun engine was validated</h2>
+  <p class="lede">
+    The poster claims Lumos tracks NOAA's reference algorithm to within 0.219 degrees.
+    Here is exactly how that number was produced.
+  </p>
+
+  <h3>What was compared</h3>
+  <p>
+    Lumos derives sun position from <code>suncalc@1.9.0</code>, called in
+    <code>packages/core/src/sunlight.ts</code>. NOAA's Solar Position Algorithm was
+    re-implemented from the published equations in a standalone script that shares no
+    code with the application. The two were then compared on the quantity the renderer
+    actually consumes: the sun direction vector, after Lumos applies its own
+    azimuth-to-bearing conversion.
+  </p>
+
+  <h3>Sampling</h3>
+  <table>
+    <tr><th>Parameter</th><th>Value</th></tr>
+    <tr><td>Period</td><td>Every day of 2026</td></tr>
+    <tr><td>Interval</td><td>Every 10 minutes</td></tr>
+    <tr><td>Sites</td><td>Singapore (1.35&deg;N), New York (40.71&deg;N), Reykjav&iacute;k (64.15&deg;N)</td></tr>
+    <tr><td>Filter</td><td>Sun above 5&deg; elevation (daylight only)</td></tr>
+    <tr><td>Refraction</td><td>Neither corrected, so the comparison is like for like</td></tr>
+    <tr><td>Total samples</td><td class="n">70,475</td></tr>
+  </table>
+
+  <h3>Self-check before trusting the result</h3>
+  <p>
+    The NOAA implementation is verified against two analytic values before any
+    comparison runs. At solar noon on the June solstice, New York should reach
+    90 &minus; 40.71 + 23.44 = 72.7&deg;; the script computes 72.724&deg;. At the March
+    equinox, Singapore should reach 90 &minus; 1.35 = 88.6&deg;; the script computes
+    88.461&deg;. Both pass.
+  </p>
+
+  <h3>Result</h3>
+  <table>
+    <tr>
+      <th>Site</th><th class="n">Latitude</th><th class="n">Samples</th>
+      <th class="n">Mean error</th><th class="n">Max error</th>
+    </tr>
+    <tr><td>Singapore</td><td class="n">1.35&deg;N</td><td class="n">24,734</td><td class="n">0.1429&deg;</td><td class="n">0.2187&deg;</td></tr>
+    <tr><td>New York</td><td class="n">40.71&deg;N</td><td class="n">24,301</td><td class="n">0.1430&deg;</td><td class="n">0.2187&deg;</td></tr>
+    <tr><td>Reykjav&iacute;k</td><td class="n">64.15&deg;N</td><td class="n">21,440</td><td class="n">0.1468&deg;</td><td class="n">0.2187&deg;</td></tr>
+  </table>
+
+  <div class="note">
+    <strong>Why 0.219&deg; is small.</strong> The solar disc subtends 0.5334&deg;, so the
+    error is 41% of the width of the sun itself. In physical terms it displaces a
+    shadow by 3.8&nbsp;mm at one metre, while the penumbra cast by the sun's finite
+    disc is already 9.3&nbsp;mm wide at that distance. The error sits inside the
+    shadow's own soft edge and cannot be seen.
+  </div>
+
+  <h3>The near-zenith finding</h3>
+  <p>
+    Azimuth error behaves very differently from direction error near the zenith. This
+    matters at tropical latitudes, so it was measured rather than assumed.
+  </p>
+  <table>
+    <tr>
+      <th>Sun elevation</th><th class="n">Samples</th>
+      <th class="n">Mean azimuth error</th><th class="n">Max azimuth error</th>
+      <th class="n">Mean direction error</th>
+    </tr>
+    <tr><td>5&ndash;60&deg;</td><td class="n">87,195</td><td class="n">0.144&deg;</td><td class="n">0.394&deg;</td><td class="n">0.1391&deg;</td></tr>
+    <tr><td>60&ndash;80&deg;</td><td class="n">33,296</td><td class="n">0.292&deg;</td><td class="n">1.230&deg;</td><td class="n">0.1461&deg;</td></tr>
+    <tr><td>80&ndash;85&deg;</td><td class="n">2,477</td><td class="n">1.017&deg;</td><td class="n">2.499&deg;</td><td class="n">0.2086&deg;</td></tr>
+    <tr><td>85&ndash;88&deg;</td><td class="n">678</td><td class="n">2.227&deg;</td><td class="n">5.792&deg;</td><td class="n">0.2137&deg;</td></tr>
+    <tr><td>88&ndash;89&deg;</td><td class="n">96</td><td class="n">5.188&deg;</td><td class="n">11.868&deg;</td><td class="n">0.2149&deg;</td></tr>
+    <tr><td>89&ndash;90&deg;</td><td class="n">34</td><td class="n">14.467&deg;</td><td class="n">60.107&deg;</td><td class="n">0.2151&deg;</td></tr>
+  </table>
+  <p>
+    Azimuth error grows by more than two orders of magnitude while direction error
+    stays flat. That is the signature of a coordinate singularity rather than a physics
+    error: near the zenith, azimuth swings wildly for a negligible change in actual
+    direction. Singapore's sun exceeds 88&deg; on 20 days of 2026, so this regime is
+    reached in normal use and is documented rather than hidden.
+  </p>
+
+  <h3>Reproduce it</h3>
+  <pre><code>git clone https://github.com/tjandera/lumos &amp;&amp; cd lumos
+npm install suncalc@1.9.0
+node scripts/validation/sun-vs-noaa.js
+node scripts/validation/sun-direction-error.js</code></pre>
+
+  <div class="note warn">
+    <strong>What this does not prove.</strong> These scripts validate the sun vector,
+    not the rendered image. Confirming that the drawn shadow lands where the real one
+    does requires photographing a room at known times and comparing. That test is
+    planned, not done.
+  </div>
+
+  <h2>References</h2>
+
+  <ol class="refs">
+    <li>
+      <span class="t">2025 Retail Returns Landscape<span class="tag primary">Industry primary</span></span>
+      <span class="src">National Retail Federation and Happy Returns, 2025. Reports a 15.8% overall
+      return rate, 19.3% for online sales, and US$849.9 billion in total returned merchandise.</span>
+      <a href="https://nrf.com/research/2025-retail-returns-landscape">nrf.com/research/2025-retail-returns-landscape</a>
+    </li>
+    <li>
+      <span class="t">Furniture and home return rate benchmarks<span class="tag caution">Vendor published</span></span>
+      <span class="src">Industry compilations (Eightx; First Chair, 2025). Source of the 15&ndash;20%
+      category return rate, the roughly 58% attribution to size and space mismatch, and the
+      US$55&ndash;90 per item processing cost. These are vendor blogs rather than audited
+      research, so they are presented as indicative. The direction is corroborated by the NRF
+      figures above; the precise percentages should be treated with caution.</span>
+      <a href="https://eightx.co/blog/average-furniture-and-home-return-rate-benchmarks">eightx.co/blog/average-furniture-and-home-return-rate-benchmarks</a>
+    </li>
+    <li>
+      <span class="t">Access to Daylight at Home Improves Circadian Alignment, Sleep, and Mental Health in Healthy Adults: A Crossover Study<span class="tag peer">Peer reviewed</span></span>
+      <span class="src">Nagare R, Woo M, MacNaughton P, Plitnick B, Tinianov B, Figueiro M.
+      <em>International Journal of Environmental Research and Public Health</em>, 2021;18(19):9980.
+      Source of the 22 minute earlier sleep onset (p = 0.05), the 15 minute melatonin onset delay
+      under blinds (p = 0.027), the 0.88 point sleep regularity improvement (p = 0.001), and the
+      7% higher positive affect (p = 0.035).</span>
+      <a href="https://doi.org/10.3390/ijerph18199980">doi.org/10.3390/ijerph18199980</a>
+    </li>
+    <li>
+      <span class="t">West-facing HDB orientation and afternoon heat<span class="tag caution">Reporting</span></span>
+      <span class="src">The Independent SG and BTO Analysis, 2025. Source of the 2pm to 6pm
+      afternoon sun exposure window for west-facing units and the observation that concrete
+      re-radiates stored heat past midnight. Journalism and analysis rather than a controlled
+      study, cited to establish that the problem is recognised locally.</span>
+      <a href="https://theindependent.sg/man-regrets-buying-hdb-flat-after-realising-it-faces-the-western-sun-says-he-and-his-wife-get-bbq-ed-every-afternoon/">theindependent.sg</a>
+    </li>
+    <li>
+      <span class="t">Solar Calculator: calculation details<span class="tag primary">Reference standard</span></span>
+      <span class="src">NOAA Global Monitoring Laboratory. The published equations
+      re-implemented for the validation described above.</span>
+      <a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html">gml.noaa.gov/grad/solcalc/calcdetails.html</a>
+    </li>
+    <li>
+      <span class="t">Astronomical Algorithms<span class="tag primary">Reference standard</span></span>
+      <span class="src">Meeus J., Willmann-Bell. The shared basis of both
+      <code>suncalc</code> and NOAA's calculator. Because they derive from the same source,
+      close agreement is expected. The measurement confirms the implementation and the
+      coordinate conversion are correct, which is a different question from whether the
+      underlying astronomy is correct.</span>
+    </li>
+    <li>
+      <span class="t">SS 531 Code of Practice for Lighting of Work Places<span class="tag primary">Standard</span></span>
+      <span class="src">Singapore Standards. Cited for scope rather than content: it covers
+      workplaces, not homes, which is why the application's residential lux targets of
+      100, 150, 300 and 500 lux are described as design approximations rather than
+      compliance values.</span>
+      <a href="https://www.singaporestandardseshop.sg/Product/SSPdtDetail/df67737c-a95c-4a21-acfb-a52b086e37b4">singaporestandardseshop.sg</a>
+    </li>
+    <li>
+      <span class="t">suncalc<span class="tag primary">Software</span></span>
+      <span class="src">Mourner (Vladimir Agafonkin), version 1.9.0. The library Lumos uses
+      for sun position, pinned in <code>packages/core/package.json</code>.</span>
+      <a href="https://github.com/mourner/suncalc">github.com/mourner/suncalc</a>
+    </li>
+  </ol>
+
+  <h2>Asset provenance</h2>
+  <p>
+    All 3D models and textures are CC0. The furniture catalogue uses Poly Haven and
+    Kenney assets scaled to catalogue dimensions at load time, ten photographic PBR
+    material families from ambientCG, and the Poly Haven <code>apartment</code> HDRI
+    fetched at runtime. Every file is recorded in
+    <a href="https://github.com/tjandera/lumos/blob/main/LICENSES.md">LICENSES.md</a>.
+    The application itself is MIT licensed.
+  </p>
+
+  <footer>
+    Project Lumos &middot; LaunchPad Symposium 2026 &middot; Acacia AI Society<br>
+    <a href="https://github.com/tjandera/lumos">github.com/tjandera/lumos</a>
+  </footer>
+</div>
