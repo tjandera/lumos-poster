@@ -156,3 +156,19 @@ you have.** They self-check against two analytic solar-noon values before report
 
 Every other figure comes from the repo's own docs (`README.md`,
 `docs/submission/WRITEUP.md`) or a source listed on the citations page.
+
+## The evidence page
+
+`site/index.html` is deployed at **https://lumos-evidence.vercel.app** and is what the
+poster's footer QR points at. It carries every citation, the full NOAA validation method
+with the equations, all raw numbers behind sections 3 and 5, and the limits we do not
+claim.
+
+Redeploy after editing it:
+
+```bash
+cd site && vercel deploy --prod --yes
+```
+
+The QR is also exported as `assets/qr-evidence.jpg` (1600 x 1600 px, ~1350 dpi at 30 mm)
+if you need to drop it into a slide or another document.

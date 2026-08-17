@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Project Lumos — Evidence Appendix</title>
+<meta name="description" content="Every citation, the complete validation method, and the raw numbers behind sections 3 and 5 of the Project Lumos poster.">
+<style>
+:root{
+  --ink:#0A1428; --ink-2:#16233D; --paper:#EDF0F4; --paper-2:#FFFFFF;
+  --rule:#C4CCD8; --rule-dark:#2E3E5C;
+  --sun:#B26F14; --sun-hi:#FFC24B; --sky:#2F5C8F;
+  --ok:#2F7D5E; --warn:#A8761F; --gap-c:#B4552F;
+  --tx:#101A2C; --tx-mute:#4A5570; --tx-inv:#EDF0F4; --tx-inv-mute:#A6B5CC;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--tx);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+
+header{background:var(--ink);color:var(--tx-inv);padding:46px 0 40px}
+.kick{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun-hi);font-weight:700;margin-bottom:14px}
+h1{font-size:clamp(28px,5vw,42px);line-height:1.06;letter-spacing:-.03em;font-weight:800;color:#fff}
+h1 .l{color:var(--sun-hi)}
+header p{margin-top:14px;color:var(--tx-inv-mute);font-size:16.5px;max-width:64ch}
+header a{color:var(--sun-hi)}
+.hmeta{margin-top:20px;font-family:var(--mono);font-size:13px;color:var(--tx-inv-mute);line-height:1.7}
+.hmeta b{color:var(--tx-inv)}
+
+nav{position:sticky;top:0;z-index:10;background:var(--ink-2);border-bottom:1px solid var(--rule-dark);overflow-x:auto}
+nav ul{display:flex;gap:2px;list-style:none;padding:0;max-width:900px;margin:0 auto;padding:0 12px}
+nav a{display:block;padding:12px 12px;font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--tx-inv-mute);text-decoration:none;white-space:nowrap}
+nav a:hover,nav a:focus-visible{color:var(--sun-hi)}
+
+main{padding-bottom:80px}
+section{padding-top:44px}
+h2{font-size:clamp(21px,3.4vw,27px);letter-spacing:-.02em;font-weight:800;margin-bottom:4px;padding-bottom:9px;border-bottom:2px solid var(--ink)}
+h2 .n{font-family:var(--mono);color:var(--sun);margin-right:9px}
+h3{font-size:17.5px;font-weight:700;margin:28px 0 8px;letter-spacing:-.01em}
+h4{font-size:14px;font-weight:700;margin:18px 0 6px;font-family:var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--tx-mute)}
+p{font-size:16px;margin:12px 0;max-width:72ch}
+.lede{font-size:17px;color:var(--tx-mute);margin-top:14px}
+ul.b{margin:12px 0 12px 20px;font-size:16px}
+ul.b li{margin:6px 0}
+
+.tw{overflow-x:auto;margin:16px 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+th{font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;text-align:left;color:var(--tx-mute);border-bottom:2px solid var(--ink);padding:0 12px 8px 0;vertical-align:bottom}
+td{padding:9px 12px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;padding-right:0}
+tr.hi td{background:rgba(255,194,75,.20);font-weight:700}
+.good{color:var(--ok);font-weight:700}
+.bad{color:var(--gap-c);font-weight:700}
+
+pre{background:var(--ink);color:var(--sun-hi);font-family:var(--mono);font-size:13px;padding:16px 18px;border-radius:5px;overflow-x:auto;line-height:1.6;margin:14px 0}
+code{font-family:var(--mono);font-size:.9em;background:#DDE3EC;padding:1.5px 5px;border-radius:3px}
+pre code{background:none;padding:0;color:inherit;font-size:inherit}
+
+.note{background:var(--paper-2);border-left:4px solid var(--sun);padding:15px 19px;margin:20px 0;font-size:15.5px}
+.note.warn{border-left-color:var(--gap-c)}
+.note.ok{border-left-color:var(--ok)}
+.note h4{margin-top:0}
+
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+.fig{background:var(--paper-2);border:1px solid var(--rule);padding:14px 16px;border-radius:4px}
+.fig .v{font-family:var(--mono);font-size:25px;font-weight:800;color:var(--sun);letter-spacing:-.03em;line-height:1}
+.fig .k{font-family:var(--mono);font-size:11.5px;color:var(--tx-mute);letter-spacing:.05em;text-transform:uppercase;margin-top:7px;line-height:1.35}
+
+ol.refs{list-style:none;counter-reset:r;margin-top:14px}
+ol.refs li{counter-increment:r;position:relative;padding:16px 0 16px 44px;border-bottom:1px solid var(--rule);font-size:15.5px;line-height:1.5}
+ol.refs li:last-child{border-bottom:none}
+ol.refs li::before{content:counter(r);position:absolute;left:0;top:16px;font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--paper);background:var(--ink);width:25px;height:25px;border-radius:3px;display:flex;align-items:center;justify-content:center}
+ol.refs .t{font-weight:700;display:block;margin-bottom:3px}
+ol.refs .src{color:var(--tx-mute);font-size:14.5px;display:block}
+ol.refs a{font-family:var(--mono);font-size:12.5px;color:var(--sky);word-break:break-all;display:inline-block;margin-top:5px}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:3px 7px;border-radius:3px;vertical-align:2px;margin-left:6px}
+.tag.peer{background:#DCEBE3;color:var(--ok)}
+.tag.pri{background:#DFE7F2;color:var(--sky)}
+.tag.cau{background:#F5E0D6;color:var(--gap-c)}
+
+footer{background:var(--ink-2);color:var(--tx-inv-mute);padding:30px 0;font-family:var(--mono);font-size:13px;line-height:1.7}
+footer a{color:var(--sun-hi)}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1626;--paper-2:#16233D;--rule:#2A3950;
+    --tx:#E4E9F0;--tx-mute:#93A1B8;--sky:#7FA8D4;--sun:#FFC24B;
+    --ok:#5FBF95;--gap-c:#E08A5F;--warn:#D9A441;
+  }
+  :root:not([data-theme="light"]) code{background:#22314A;color:#E4E9F0}
+  :root:not([data-theme="light"]) .tag.peer{background:#1C3B2E;color:#5FBF95}
+  :root:not([data-theme="light"]) .tag.pri{background:#1E2E47;color:#7FA8D4}
+  :root:not([data-theme="light"]) .tag.cau{background:#3A241B;color:#E08A5F}
+  :root:not([data-theme="light"]) h2{border-bottom-color:#3A4A66}
+  :root:not([data-theme="light"]) th{border-bottom-color:#3A4A66}
+}
+:root[data-theme="dark"]{
+  --paper:#0E1626;--paper-2:#16233D;--rule:#2A3950;
+  --tx:#E4E9F0;--tx-mute:#93A1B8;--sky:#7FA8D4;--sun:#FFC24B;
+  --ok:#5FBF95;--gap-c:#E08A5F;--warn:#D9A441;
+}
+:root[data-theme="dark"] code{background:#22314A;color:#E4E9F0}
+:root[data-theme="dark"] .tag.peer{background:#1C3B2E;color:#5FBF95}
+:root[data-theme="dark"] .tag.pri{background:#1E2E47;color:#7FA8D4}
+:root[data-theme="dark"] .tag.cau{background:#3A241B;color:#E08A5F}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="kick">Project Lumos / LaunchPad Symposium 2026</div>
+    <h1>Evidence <span class="l">appendix</span></h1>
+    <p>
+      Every citation, the complete validation method, and the raw numbers behind
+      sections 3 and 5 of the poster. Nothing here is summarised: this is the full
+      working, including the results that weaken our own claims.
+    </p>
+    <div class="hmeta">
+      Team <b>Sumin &middot; Darlene &middot; Matthew</b><br>
+      Repository <a href="https://github.com/tjandera/lumos">github.com/tjandera/lumos</a><br>
+      Poster source <a href="https://github.com/tjandera/lumos-poster">github.com/tjandera/lumos-poster</a>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#sun">§3 Sun accuracy</a></li>
+    <li><a href="#zenith">Near-zenith</a></li>
+    <li><a href="#shadow">Shadow maths</a></li>
+    <li><a href="#layout">§5 Layout benchmark</a></li>
+    <li><a href="#limits">What we do not claim</a></li>
+    <li><a href="#refs">References</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+<!-- ==================== SUN ==================== -->
+<section id="sun">
+  <h2><span class="n">§3</span>Is the sun in the right place?</h2>
+  <p class="lede">
+    The poster claims Lumos' sun never deviates from NOAA's reference model by more
+    than 0.219 degrees. Here is exactly how that number was produced, and what it does
+    and does not mean.
+  </p>
+
+  <h3>What was compared</h3>
+  <p>
+    Lumos derives sun position from <code>suncalc@1.9.0</code>, called in
+    <code>packages/core/src/sunlight.ts</code>. NOAA's Solar Position Algorithm was
+    re-implemented from the published equations<a href="#refs">[5]</a> in a standalone
+    script that shares no code with the application. The two were then compared on the
+    quantity the renderer actually consumes: the <strong>sun direction vector</strong>,
+    after Lumos applies its own azimuth-to-bearing conversion.
+  </p>
+  <div class="note">
+    <h4>Why this is worth doing at all</h4>
+    <p style="margin:0">
+      Both <code>suncalc</code> and NOAA's calculator derive from the same source, Meeus'
+      <em>Astronomical Algorithms</em><a href="#refs">[6]</a>. Close agreement is therefore
+      <strong>expected</strong>. What this measurement establishes is not that the
+      astronomy is right, but that <strong>our implementation and our coordinate
+      conversion are right</strong>. Those are the parts we wrote, and those are the parts
+      that could silently be wrong.
+    </p>
+  </div>
+
+  <h3>The algorithm, as implemented</h3>
+  <p>Julian day from a UTC timestamp, then NOAA's chain of terms:</p>
+  <pre><code>JC   = (JD - 2451545) / 36525                      // Julian century
+L0   = 280.46646 + JC(36000.76983 + 0.0003032 JC)  // geometric mean longitude
+M    = 357.52911 + JC(35999.05029 - 0.0001537 JC)  // geometric mean anomaly
+e    = 0.016708634 - JC(0.000042037 + 0.0000001267 JC)
+C    = sin(M)(1.914602 - JC(0.004817 + 0.000014 JC))
+     + sin(2M)(0.019993 - 0.000101 JC) + sin(3M)(0.000289)
+app  = L0 + C - 0.00569 - 0.00478 sin(125.04 - 1934.136 JC)
+obl  = 23.439291... + 0.00256 cos(125.04 - 1934.136 JC)
+decl = asin( sin(obl) sin(app) )
+y    = tan²(obl / 2)
+eqt  = 4 · deg( y sin(2L0) - 2e sin(M) + 4ey sin(M)cos(2L0)
+                - 0.5y² sin(4L0) - 1.25e² sin(2M) )
+tst  = (UTC_minutes + eqt + 4 · longitude) mod 1440
+ha   = tst/4 - 180
+zen  = acos( sin(lat)sin(decl) + cos(lat)cos(decl)cos(ha) )
+elev = 90 - zen</code></pre>
+  <p>
+    Neither implementation applies an atmospheric refraction correction, so the
+    comparison is like for like.
+  </p>
+
+  <h3>Self-check before trusting any of it</h3>
+  <p>
+    The script verifies its own NOAA implementation against two values that can be
+    derived analytically, and refuses to report if either fails.
+  </p>
+  <div class="tw"><table>
+    <tr><th>Condition</th><th>Analytic expectation</th><th class="n">Computed</th><th class="n">Result</th></tr>
+    <tr>
+      <td>New York, solar noon, June solstice</td>
+      <td>90 &minus; 40.7128 + 23.44 = 72.73&deg;</td>
+      <td class="n">72.724&deg;</td><td class="n good">PASS</td>
+    </tr>
+    <tr>
+      <td>Singapore, solar noon, March equinox</td>
+      <td>90 &minus; 1.3521 &asymp; 88.6&deg;</td>
+      <td class="n">88.461&deg;</td><td class="n good">PASS</td>
+    </tr>
+  </table></div>
+
+  <h3>Sampling</h3>
+  <div class="tw"><table>
+    <tr><th>Parameter</th><th>Value</th></tr>
+    <tr><td>Period</td><td>Every day of 2026</td></tr>
+    <tr><td>Interval</td><td>Every 10 minutes (144 samples per day per site)</td></tr>
+    <tr><td>Sites</td><td>Singapore 1.3521&deg;N, New York 40.7128&deg;N, Reykjav&iacute;k 64.1466&deg;N</td></tr>
+    <tr><td>Filter</td><td>Sun above 5&deg; elevation, so daylight only</td></tr>
+    <tr><td>Refraction</td><td>Not applied on either side</td></tr>
+    <tr class="hi"><td>Total samples compared</td><td class="n">70,475</td></tr>
+  </table></div>
+
+  <h3>Result 1: elevation and azimuth, treated separately</h3>
+  <div class="tw"><table>
+    <tr>
+      <th>Site</th><th class="n">Samples</th>
+      <th class="n">Elev. mean</th><th class="n">Elev. max</th>
+      <th class="n">Azim. mean</th><th class="n">Azim. max</th>
+    </tr>
+    <tr><td>Singapore</td><td class="n">24,734</td><td class="n">0.0804&deg;</td><td class="n">0.2177&deg;</td><td class="n">0.2208&deg;</td><td class="n bad">32.7286&deg;</td></tr>
+    <tr><td>New York</td><td class="n">24,301</td><td class="n">0.0949&deg;</td><td class="n">0.2187&deg;</td><td class="n">0.1055&deg;</td><td class="n">0.2935&deg;</td></tr>
+    <tr><td>Reykjav&iacute;k</td><td class="n">21,440</td><td class="n">0.1148&deg;</td><td class="n">0.2151&deg;</td><td class="n">0.0857&deg;</td><td class="n">0.1928&deg;</td></tr>
+  </table></div>
+  <p>
+    Elevation agrees tightly everywhere. Azimuth agrees tightly at New York and
+    Reykjav&iacute;k but shows a <strong>32.73&deg; outlier at Singapore</strong>, on
+    2026-09-19 at 05:00 UTC, which is around solar noon local time and three days before
+    the September equinox. That outlier is the reason for the next section.
+  </p>
+
+  <h3>Result 2: the direction vector, which is what actually renders</h3>
+  <p>
+    Azimuth and elevation are a coordinate system, not the thing the renderer consumes.
+    The renderer takes a unit vector. The honest error metric is therefore the angle
+    between NOAA's unit vector and Lumos' unit vector.
+  </p>
+  <div class="tw"><table>
+    <tr><th>Site</th><th class="n">Latitude</th><th class="n">Samples</th><th class="n">Mean error</th><th class="n">Max error</th><th class="n">&gt;0.10&deg;</th></tr>
+    <tr><td>Singapore</td><td class="n">1.3521&deg;N</td><td class="n">24,734</td><td class="n">0.1429&deg;</td><td class="n">0.2187&deg;</td><td class="n">71.25%</td></tr>
+    <tr><td>New York</td><td class="n">40.7128&deg;N</td><td class="n">24,301</td><td class="n">0.1430&deg;</td><td class="n">0.2187&deg;</td><td class="n">71.52%</td></tr>
+    <tr><td>Reykjav&iacute;k</td><td class="n">64.1466&deg;N</td><td class="n">21,440</td><td class="n">0.1468&deg;</td><td class="n">0.2187&deg;</td><td class="n">73.80%</td></tr>
+  </table></div>
+  <div class="note ok">
+    <h4>The headline number</h4>
+    <p style="margin:0">
+      Maximum direction error is <strong>0.2187&deg;</strong>, and it is the same to four
+      decimal places at the equator, at 40&deg;N and at 64&deg;N. An error that is flat
+      across latitude is characteristic of a small constant modelling difference between
+      the two algorithms, not of a latitude-dependent bug in ours.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== ZENITH ==================== -->
+<section id="zenith">
+  <h2>The near-zenith finding</h2>
+  <p class="lede">
+    Azimuth error grows by more than two orders of magnitude near the zenith while
+    direction error stays flat. That is the signature of a coordinate singularity, not
+    a physics error, and it matters at tropical latitudes.
+  </p>
+  <p>
+    Singapore sits at 1.35&deg;N, so twice a year the sun passes almost directly overhead.
+    As it does, the compass bearing of the sun swings across a large arc for a negligible
+    change in its actual direction. Measured over 2026 at 2-minute resolution:
+  </p>
+  <div class="tw"><table>
+    <tr>
+      <th>Sun elevation</th><th class="n">Samples</th>
+      <th class="n">Mean azimuth err</th><th class="n">Max azimuth err</th>
+      <th class="n">Mean direction err</th>
+    </tr>
+    <tr><td>5&ndash;60&deg;</td><td class="n">87,195</td><td class="n">0.144&deg;</td><td class="n">0.394&deg;</td><td class="n">0.1391&deg;</td></tr>
+    <tr><td>60&ndash;80&deg;</td><td class="n">33,296</td><td class="n">0.292&deg;</td><td class="n">1.230&deg;</td><td class="n">0.1461&deg;</td></tr>
+    <tr><td>80&ndash;85&deg;</td><td class="n">2,477</td><td class="n">1.017&deg;</td><td class="n">2.499&deg;</td><td class="n">0.2086&deg;</td></tr>
+    <tr><td>85&ndash;88&deg;</td><td class="n">678</td><td class="n">2.227&deg;</td><td class="n">5.792&deg;</td><td class="n">0.2137&deg;</td></tr>
+    <tr><td>88&ndash;89&deg;</td><td class="n">96</td><td class="n">5.188&deg;</td><td class="n">11.868&deg;</td><td class="n">0.2149&deg;</td></tr>
+    <tr class="hi"><td>89&ndash;90&deg;</td><td class="n">34</td><td class="n">14.467&deg;</td><td class="n">60.107&deg;</td><td class="n">0.2151&deg;</td></tr>
+  </table></div>
+  <p>
+    Azimuth error rises from 0.394&deg; to 60.107&deg;, a factor of 152. Direction error
+    over the same range moves from 0.1391&deg; to 0.2151&deg;, a factor of 1.55. The two
+    columns separating is the entire finding.
+  </p>
+  <div class="figs">
+    <div class="fig"><div class="v">20</div><div class="k">days in 2026 Singapore's sun exceeds 88&deg;</div></div>
+    <div class="fig"><div class="v">0.215&deg;</div><div class="k">direction error in that regime</div></div>
+    <div class="fig"><div class="v">3.5%</div><div class="k">shadow length vs caster height at 88&deg;</div></div>
+  </div>
+  <p>
+    Above 88&deg; a shadow is shorter than 3.5% of the height of the object casting it, so
+    the compass direction of that shadow is visually irrelevant. This is why the
+    instability is real, reachable in normal use in Singapore, and yet has no visible
+    consequence. We report it rather than hiding it because a reader who checks only the
+    azimuth column would otherwise conclude our sun is broken.
+  </p>
+</section>
+
+<!-- ==================== SHADOW MATHS ==================== -->
+<section id="shadow">
+  <h2>What 0.219&deg; means physically</h2>
+  <p class="lede">
+    An angle is not intuitive. Converted into millimetres of shadow, the error is smaller
+    than the blur that is already on every shadow edge.
+  </p>
+
+  <h3>Against the size of the sun itself</h3>
+  <p>
+    The solar disc subtends a mean angular diameter of <strong>0.5334&deg;</strong> seen
+    from Earth. Our worst error is therefore
+  </p>
+  <pre><code>0.2187 / 0.5334 = 0.410  →  41.0% of the width of the sun</code></pre>
+
+  <h3>Shadow displacement</h3>
+  <p>
+    An angular error <em>θ</em> displaces the edge of a shadow by <code>d · tan(θ)</code>,
+    where <em>d</em> is the distance from the object to the surface it shadows. The
+    penumbra, the soft edge that exists because the sun is a disc and not a point, has
+    width <code>d · tan(0.5334&deg;)</code>.
+  </p>
+  <div class="tw"><table>
+    <tr><th>Distance</th><th class="n">Displacement from our error</th><th class="n">Penumbra width already present</th></tr>
+    <tr><td>0.5 m</td><td class="n">1.9 mm</td><td class="n">4.7 mm</td></tr>
+    <tr class="hi"><td>1 m</td><td class="n">3.8 mm</td><td class="n">9.3 mm</td></tr>
+    <tr><td>2 m</td><td class="n">7.6 mm</td><td class="n">18.6 mm</td></tr>
+    <tr><td>3 m</td><td class="n">11.5 mm</td><td class="n">27.9 mm</td></tr>
+  </table></div>
+  <div class="note ok">
+    <p style="margin:0">
+      At every distance the displacement is smaller than the penumbra. The error falls
+      <strong>inside the soft edge the shadow already has</strong>, so it cannot be
+      resolved by eye even in principle.
+    </p>
+  </div>
+
+  <h3>Shadow length, the worst case</h3>
+  <p>
+    Length is more sensitive than displacement when the sun is low, because shadow length
+    goes as <code>h / tan(elevation)</code> and its derivative is
+    <code>h / sin²(elevation)</code>. For a 1 m tall object:
+  </p>
+  <div class="tw"><table>
+    <tr><th>Sun elevation</th><th class="n">Shadow length</th><th class="n">Length error from 0.219&deg;</th><th class="n">As % of length</th></tr>
+    <tr><td>15&deg;</td><td class="n">3.732 m</td><td class="n">57.0 mm</td><td class="n">1.5%</td></tr>
+    <tr><td>30&deg;</td><td class="n">1.732 m</td><td class="n">15.3 mm</td><td class="n">0.9%</td></tr>
+    <tr><td>45&deg;</td><td class="n">1.000 m</td><td class="n">7.6 mm</td><td class="n">0.8%</td></tr>
+    <tr><td>60&deg;</td><td class="n">0.577 m</td><td class="n">5.1 mm</td><td class="n">0.9%</td></tr>
+    <tr><td>75&deg;</td><td class="n">0.268 m</td><td class="n">4.1 mm</td><td class="n">1.5%</td></tr>
+  </table></div>
+  <p>
+    The worst case is a low sun, where a 1 m object's shadow is off by 57 mm over 3.7 m.
+    That is 1.5% of the length, and still well inside the penumbra at that distance.
+  </p>
+
+  <h3>Reproduce all of it</h3>
+  <pre><code>git clone https://github.com/tjandera/lumos &amp;&amp; cd lumos
+npm install suncalc@1.9.0
+node scripts/validation/sun-vs-noaa.js          # elevation and azimuth
+node scripts/validation/sun-direction-error.js  # direction vector, near-zenith bands</code></pre>
+  <p>
+    Both scripts run the self-check first and print every figure on this page. They take
+    about 20 seconds each.
+  </p>
+</section>
+
+<!-- ==================== LAYOUT ==================== -->
+<section id="layout">
+  <h2><span class="n">§5</span>Does the layout hold together?</h2>
+  <p class="lede">
+    The poster claims our deterministic placer cuts hard-constraint violations from 89.2%
+    to 14.9% against a random-placement baseline. Here is the full result, including the
+    columns that did not fit on the poster.
+  </p>
+
+  <h3>Setup</h3>
+  <div class="tw"><table>
+    <tr><th>Parameter</th><th>Value</th></tr>
+    <tr><td>Trials</td><td>200, seeded</td></tr>
+    <tr><td>Items per trial</td><td>3 to 6</td></tr>
+    <tr><td>Room sizes</td><td>3.5 to 7 m by 3 to 6 m</td></tr>
+    <tr><td>Placement requests per strategy</td><td class="n">885</td></tr>
+    <tr><td>Grading</td><td>One validator, written independently of the placer, applied to both strategies</td></tr>
+    <tr><td>Workload</td><td>Deliberately includes an item too large to fit, so the refusal rate reflects genuine failures rather than a cherry-picked easy set</td></tr>
+  </table></div>
+
+  <h3>Full result</h3>
+  <div class="tw"><table>
+    <tr><th>Metric</th><th class="n">Random baseline</th><th class="n">Deterministic placer</th></tr>
+    <tr class="hi"><td>Placements violating at least one hard constraint</td><td class="n">89.2%</td><td class="n">14.9%</td></tr>
+    <tr><td>&mdash; out of room</td><td class="n">50.5%</td><td class="n good">0%</td></tr>
+    <tr><td>&mdash; overlapping another item</td><td class="n">74.8%</td><td class="n good">0%</td></tr>
+    <tr><td>&mdash; front clearance / walkway violated</td><td class="n">44.6%</td><td class="n bad">14.9%</td></tr>
+    <tr><td>&mdash; door swing blocked</td><td class="n">26.2%</td><td class="n good">0%</td></tr>
+    <tr><td>Batches with every placement valid</td><td class="n">0.5%</td><td class="n">58.0%</td></tr>
+    <tr><td>Refused outright, no bad placement emitted</td><td class="n">0%</td><td class="n">19.1%</td></tr>
+    <tr><td>Latency per placement, mean / p95</td><td class="n">~0.001 / ~0.004 ms</td><td class="n">~1.2 / ~2.5 ms</td></tr>
+  </table></div>
+
+  <div class="note warn">
+    <h4>Three caveats on reading this table</h4>
+    <ul class="b" style="margin-bottom:0">
+      <li>
+        <strong>"Batches fully valid" flatters us.</strong> A trial in which every request
+        was refused counts as vacuously clean. Read the 58.0% alongside the 19.1% refusal
+        rate, never on its own.
+      </li>
+      <li>
+        <strong>Latency is order-of-magnitude only.</strong> The mean varied 6.06 to 1.15
+        to 1.21 ms across three consecutive runs as the JIT warmed up. Every count-based
+        metric was byte-identical across those same runs.
+      </li>
+      <li>
+        <strong>The 14.9% is a real defect, not noise.</strong> See below.
+      </li>
+    </ul>
+  </div>
+
+  <h3>The defect this benchmark found</h3>
+  <p>
+    The placer's own documentation states that every emitted placement satisfies every
+    hard constraint. It does not. <strong>14.9% of placements leave a walkway
+    blocked</strong>, and all <strong>107</strong> observed violations share one shape.
+  </p>
+  <p>
+    <strong>Root cause.</strong> When the placer positions an item it registers that
+    item's <em>footprint</em> as an obstacle for later placements, but not the clear space
+    in front of it. So item <em>N</em>'s walkway is validated at the moment <em>N</em> is
+    placed, and item <em>N+1</em> is then free to land inside it. Nothing revisits
+    <em>N</em>.
+  </p>
+  <p>
+    <strong>Why the unit tests missed it.</strong> They check each placement against the
+    room as it stood when that placement was made, which is precisely the blind spot the
+    placer itself has. Only the benchmark's independently written validator, which grades
+    every item against the <em>final</em> batch, could expose it.
+  </p>
+  <div class="note">
+    <p style="margin:0">
+      We left the defect in and reported it because the measurement is the result.
+      Shipping a quiet fix and a clean 0% would have concealed the most useful thing we
+      learned: <strong>a validator that shares its subject's assumptions cannot find this
+      class of bug.</strong>
+    </p>
+  </div>
+
+  <div class="note warn">
+    <h4>Reproducibility status, stated plainly</h4>
+    <p style="margin:0 0 8px">
+      The constraint solver is in the repository, including its clearance handling
+      (<code>packages/ai/src/solver.ts</code>, <code>DEFAULT_CLEARANCE</code>,
+      <code>needsFrontClearance</code>, and a <code>describe("clearance")</code> block in
+      <code>solver.test.ts</code>).
+    </p>
+    <p style="margin:0">
+      The measurement harness that produced the table above is <strong>not yet in the
+      public repository</strong>. Until it is pushed, these figures are ours to assert and
+      not yet yours to verify. The sun figures in §3 are fully reproducible today.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== LIMITS ==================== -->
+<section id="limits">
+  <h2>What we do not claim</h2>
+  <p class="lede">
+    Collected in one place, because each of these is a limit a reader could otherwise
+    mistake for a claim.
+  </p>
+  <ul class="b">
+    <li>
+      <strong>The baseline is uniform-random placement, not a language model.</strong> It
+      establishes that these constraints are hard to satisfy by chance. It does not
+      establish that the placer beats an LLM, and no real LLM has been benchmarked.
+    </li>
+    <li>
+      <strong>§3 validates the sun vector, not the rendered image.</strong> Confirming
+      that a drawn shadow lands where the real one does requires photographing a room at
+      known times and comparing. That test is planned, not done.
+    </li>
+    <li>
+      <strong>Time zones and daylight saving are unverified.</strong> Sun position is
+      computed from the site's coordinates and a local time, but DST handling has never
+      been checked against reference ephemeris values. In a DST-observing region the
+      shadows could be a full hour out, rendered confidently.
+    </li>
+    <li>
+      <strong>The lux targets are design approximations.</strong> 100, 150, 300 and 500 lx
+      are targets, not certified compliance values. SS 531<a href="#refs">[7]</a> covers
+      workplaces, not homes. The code says so itself: the daylight model is described in
+      source as "a plausibility model for a design tool, not a daylight compliance
+      calculation".
+    </li>
+    <li>
+      <strong>The test suite is red.</strong> 25 tests fail after a module port still in
+      progress, so <code>pnpm test</code> exits non-zero. The features run in the
+      application; the tests point at moved paths.
+    </li>
+    <li>
+      <strong>Parts are verified by proxy.</strong> The Postgres adapter was exercised
+      against an in-memory emulation and never a live server. Docker images were reviewed
+      by hand, never run.
+    </li>
+    <li>
+      <strong>No user study.</strong> Zero external users have been observed using this.
+    </li>
+  </ul>
+</section>
+
+<!-- ==================== REFERENCES ==================== -->
+<section id="refs">
+  <h2>References</h2>
+  <p class="lede">
+    Every source cited on the poster, labelled by what kind of evidence it actually is.
+  </p>
+  <ol class="refs">
+    <li>
+      <span class="t">2025 Retail Returns Landscape<span class="tag pri">Industry primary</span></span>
+      <span class="src">
+        National Retail Federation and Happy Returns, 2025. Source of the 15.8% overall
+        return rate, 19.3% for online sales, and US$849.9 billion in total returned
+        merchandise.
+      </span>
+      <a href="https://nrf.com/research/2025-retail-returns-landscape">nrf.com/research/2025-retail-returns-landscape</a>
+    </li>
+    <li>
+      <span class="t">Furniture and home return-rate benchmarks<span class="tag cau">Vendor published</span></span>
+      <span class="src">
+        Industry compilations (Eightx; First Chair, 2025). Source of the 15 to 20% category
+        return rate, the roughly 58% attributed to size and space mismatch, and the
+        US$55 to 90 per-item processing cost. <strong>This is the weakest source we cite.</strong>
+        These are vendor blogs rather than audited research. The direction is corroborated by
+        the NRF figures above, but the precise percentages should be treated as indicative.
+      </span>
+      <a href="https://eightx.co/blog/average-furniture-and-home-return-rate-benchmarks">eightx.co/blog/average-furniture-and-home-return-rate-benchmarks</a>
+    </li>
+    <li>
+      <span class="t">Access to Daylight at Home Improves Circadian Alignment, Sleep, and Mental Health in Healthy Adults: A Crossover Study<span class="tag peer">Peer reviewed</span></span>
+      <span class="src">
+        Nagare R, Woo M, MacNaughton P, Plitnick B, Tinianov B, Figueiro M.
+        <em>International Journal of Environmental Research and Public Health</em>,
+        2021;18(19):9980. Source of the 22 minute earlier sleep onset (p = 0.05), the
+        15 minute melatonin onset delay under blinds (p = 0.027), the 0.88 point sleep
+        regularity improvement (p = 0.001), and the 7% higher positive affect (p = 0.035).
+      </span>
+      <a href="https://doi.org/10.3390/ijerph18199980">doi.org/10.3390/ijerph18199980</a>
+    </li>
+    <li>
+      <span class="t">West-facing HDB orientation and afternoon heat<span class="tag cau">Reporting</span></span>
+      <span class="src">
+        The Independent SG and BTO Analysis, 2025. Source of the 2pm to 6pm afternoon sun
+        exposure window for west-facing units and the observation that concrete re-radiates
+        stored heat past midnight. Journalism and analysis rather than a controlled study,
+        cited to establish that the problem is locally recognised.
+      </span>
+      <a href="https://theindependent.sg/man-regrets-buying-hdb-flat-after-realising-it-faces-the-western-sun-says-he-and-his-wife-get-bbq-ed-every-afternoon/">theindependent.sg</a>
+    </li>
+    <li>
+      <span class="t">Solar Calculator: calculation details<span class="tag pri">Reference standard</span></span>
+      <span class="src">
+        NOAA Global Monitoring Laboratory. The published equations re-implemented for the
+        validation in §3.
+      </span>
+      <a href="https://gml.noaa.gov/grad/solcalc/calcdetails.html">gml.noaa.gov/grad/solcalc/calcdetails.html</a>
+    </li>
+    <li>
+      <span class="t">Astronomical Algorithms<span class="tag pri">Reference standard</span></span>
+      <span class="src">
+        Meeus J., Willmann-Bell. The shared basis of both <code>suncalc</code> and NOAA's
+        calculator, which is why agreement is expected and why the measurement tests our
+        implementation rather than the underlying astronomy.
+      </span>
+    </li>
+    <li>
+      <span class="t">SS 531 Code of Practice for Lighting of Work Places<span class="tag pri">Standard</span></span>
+      <span class="src">
+        Singapore Standards. Cited for its scope rather than its content: it covers
+        workplaces, not homes, which is why the application's residential lux targets are
+        described as design approximations rather than compliance values.
+      </span>
+      <a href="https://www.singaporestandardseshop.sg/">singaporestandardseshop.sg</a>
+    </li>
+    <li>
+      <span class="t">suncalc, version 1.9.0<span class="tag pri">Software</span></span>
+      <span class="src">
+        Vladimir Agafonkin. The library Lumos uses for sun position, pinned in
+        <code>packages/core/package.json</code>.
+      </span>
+      <a href="https://github.com/mourner/suncalc">github.com/mourner/suncalc</a>
+    </li>
+  </ol>
+
+  <h3>Asset provenance</h3>
+  <p>
+    All 3D models and textures are CC0. The furniture catalogue uses Poly Haven and Kenney
+    assets scaled to catalogue dimensions at load time, ten photographic PBR material
+    families from ambientCG, and the Poly Haven <code>apartment</code> HDRI fetched at
+    runtime. Every file is recorded in
+    <a href="https://github.com/tjandera/lumos/blob/main/LICENSES.md">LICENSES.md</a>.
+    The application itself is MIT licensed.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Project Lumos &middot; LaunchPad Symposium 2026 &middot; Acacia AI Society<br>
+    Sumin &middot; Darlene &middot; Matthew<br>
+    <a href="https://github.com/tjandera/lumos">github.com/tjandera/lumos</a> &middot;
+    <a href="https://github.com/tjandera/lumos-poster">poster source</a>
+  </div>
+</footer>
+
+</body>
+</html>
